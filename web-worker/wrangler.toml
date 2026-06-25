@@ -1,0 +1,6 @@
+name = "split-web"
+main = "src/index.js"
+compatibility_date = "2024-03-01"
+
+[vars]
+# You can define environment variables here if needed
