@@ -1,0 +1,6 @@
+{
+  "name": "Spilt",
+  "description": "AI-powered payment sharing and bill splitting tool with OCR, spending tracking, and collaborative homes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
