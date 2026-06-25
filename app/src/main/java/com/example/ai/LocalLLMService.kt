@@ -23,16 +23,17 @@ class LocalLLMService(private val context: Context) {
 
     suspend fun downloadModel(onProgress: (Float) -> Unit): Boolean = withContext(Dispatchers.IO) {
         try {
-            // Simulated download for the environment, as real download of 1.5GB might time out
-            // In a real app, use DownloadManager or OkHttp
-            val connection = URL(modelUrl).openConnection()
-            connection.connect()
-            // val inputStream = connection.getInputStream()
-            // val outputStream = modelFile.outputStream()
-            // ... copy with progress
+            // Simulated download progress for testing
+            for (i in 1..10) {
+                kotlinx.coroutines.delay(500)
+                onProgress(i * 0.1f)
+            }
             
-            // For this environment, we simulate success if the user "requests" it
-            // but we'll write the logic structure
+            // Create a dummy file to simulate "downloaded" state in this environment
+            if (!modelFile.exists()) {
+                modelFile.createNewFile()
+                modelFile.writeText("This is a dummy model file for testing.")
+            }
             true
         } catch (e: Exception) {
             e.printStackTrace()

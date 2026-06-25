@@ -51,9 +51,9 @@ fun DashboardScreen(viewModel: BillViewModel, navController: NavController) {
         Scaffold(
             containerColor = Color.Transparent,
             topBar = {
-                CenterAlignedTopAppBar(
+                TopAppBar(
                     title = {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Column {
                             Text("Spilt", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Black)
                             Text("The Grand Apt", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f))
                         }
@@ -63,7 +63,7 @@ fun DashboardScreen(viewModel: BillViewModel, navController: NavController) {
                             Icon(Icons.Default.Home, "Homes")
                         }
                     },
-                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.Transparent)
+                    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
                 )
             },
             floatingActionButton = {

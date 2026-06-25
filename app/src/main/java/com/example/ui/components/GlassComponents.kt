@@ -16,31 +16,44 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun AmbientBackground() {
+    val isDark = androidx.compose.foundation.isSystemInDarkTheme()
     Box(modifier = Modifier.fillMaxSize()) {
+        // Top Left Blob
         Box(
             modifier = Modifier
-                .offset(x = (-100).dp, y = (-100).dp)
-                .size(400.dp)
-                .blur(100.dp)
-                .clip(CircleShape)
-                .background(Color(0xFF6366F1).copy(alpha = 0.2f))
-        )
-        Box(
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .offset(x = 100.dp, y = 100.dp)
+                .offset(x = (-80).dp, y = (-80).dp)
                 .size(500.dp)
                 .blur(120.dp)
                 .clip(CircleShape)
-                .background(Color(0xFFA855F7).copy(alpha = 0.2f))
+                .background(
+                    if (isDark) Color(0xFF1E1B4B).copy(alpha = 0.5f) 
+                    else Color(0xFF6366F1).copy(alpha = 0.2f)
+                )
         )
+        // Bottom Right Blob
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .offset(x = 80.dp, y = 80.dp)
+                .size(600.dp)
+                .blur(140.dp)
+                .clip(CircleShape)
+                .background(
+                    if (isDark) Color(0xFF312E81).copy(alpha = 0.4f)
+                    else Color(0xFFA855F7).copy(alpha = 0.2f)
+                )
+        )
+        // Center Accent
         Box(
             modifier = Modifier
                 .align(Alignment.Center)
-                .size(300.dp)
-                .blur(150.dp)
+                .size(400.dp)
+                .blur(180.dp)
                 .clip(CircleShape)
-                .background(Color(0xFF38BDF8).copy(alpha = 0.15f))
+                .background(
+                    if (isDark) Color(0xFF0F172A).copy(alpha = 0.6f)
+                    else Color(0xFF38BDF8).copy(alpha = 0.15f)
+                )
         )
     }
 }
