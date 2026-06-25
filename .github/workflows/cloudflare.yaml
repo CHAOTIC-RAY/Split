@@ -18,8 +18,7 @@ jobs:
         working-directory: web-worker
 
       - name: Deploy to Cloudflare Workers
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          command: deploy
-          workingDirectory: web-worker
+        run: npx wrangler deploy
+        working-directory: web-worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
