@@ -23,17 +23,29 @@ class LocalLLMService(private val context: Context) {
 
     suspend fun downloadModel(onProgress: (Float) -> Unit): Boolean = withContext(Dispatchers.IO) {
         try {
-            // Simulated download progress for testing
-            for (i in 1..10) {
-                kotlinx.coroutines.delay(500)
-                onProgress(i * 0.1f)
+            val url = URL(modelUrl)
+            val connection = url.openConnection()
+            connection.connect()
+
+            val fileLength = connection.contentLength
+            val inputStream = url.openStream()
+            val outputStream = modelFile.outputStream()
+
+            val buffer = ByteArray(8192)
+            var bytesRead: Int
+            var totalBytesRead = 0L
+
+            while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+                totalBytesRead += bytesRead
+                outputStream.write(buffer, 0, bytesRead)
+                if (fileLength > 0) {
+                    onProgress(totalBytesRead.toFloat() / fileLength.toFloat())
+                }
             }
-            
-            // Create a dummy file to simulate "downloaded" state in this environment
-            if (!modelFile.exists()) {
-                modelFile.createNewFile()
-                modelFile.writeText("This is a dummy model file for testing.")
-            }
+
+            outputStream.flush()
+            outputStream.close()
+            inputStream.close()
             true
         } catch (e: Exception) {
             e.printStackTrace()
